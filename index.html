@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    $(document).ready(function() {
+      $.ajax({
+        url: "http://musicbrainz.org/ws/2/release/?query=artist:%22A%20Perfect%20Circle%22%20AND%20primarytype:%22Album%22%20AND%20type:%22Album%22%20AND%20status:%22Official%22%20AND%20format:%22CD%22&fmt=json",
+        method: "GET"
+      }).then(function(rensonse) {
+            
+            var array = rensonse.releases;
+            //console.log(array[1]);
+            var newArr = [];
+
+            $(array).each(function(index,element) {
+                var eje = this["release-group"].id;
+                if(newArr.indexOf(eje) == -1) {
+                    newArr.push(eje);
+                } 
+            });
+            console.log(newArr);
+        })
+    });
+    </script>
+</body>
+</html>
